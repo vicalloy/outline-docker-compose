@@ -12,14 +12,12 @@ function create_global_env_file {
     cp ./templates/$fn $env_file
     env_replace NETWORKS $NETWORKS $env_file
     env_replace NETWORKS_EXTERNAL $NETWORKS_EXTERNAL $env_file
-}
-
-function create_nginx_env_file {
-    fn=env.nginx
-    env_file=../$fn
-    cp ./templates/$fn $env_file
+    # NGINX
     env_replace HTTP_IP $HTTP_IP $env_file
     env_replace HTTP_PORT_IP $HTTP_PORT_IP $env_file
+    # MINIO
+    env_replace MINIO_HTTP_IP $MINIO_HTTP_IP $env_file
+    env_replace MINIO_HTTP_PORT $MINIO_HTTP_PORT $env_file
 }
 
 function create_minio_env_file {
@@ -67,14 +65,21 @@ function create_oidc_env_file {
 
 function create_env_files {
     create_global_env_file
-    create_nginx_env_file
     create_minio_env_file
     create_outline_env_file
     create_oidc_env_file
 }
 
+function create_docker_compose_file {
+    fn=docker-compose.yml
+    file=../$fn
+    cp ./templates/$fn $file
+
+    env_tmpl_replace NETWORKS "$NETWORKS" $file
+}
+
 function init_cfg {
-    cp ./templates/docker-compose.yml ../docker-compose.yml
+    create_docker_compose_file
     create_env_files
 }
 

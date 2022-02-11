@@ -36,8 +36,14 @@ function env_replace {
     key=$1
     val=$2
     filename=$3
-    # sed -i "0,/name:/{s/${key}=.*/${key}='${val}'/}" $filename
     sed "s|${key}=.*|${key}=${val}|" -i $filename
+}
+
+function env_tmpl_replace {
+    key=$1
+    val=$2
+    filename=$3
+    sed -e "s/\${${key}}/${val}/" -i $filename
 }
 
 function env_delete {

@@ -22,7 +22,8 @@ services:
       - ./data/minio_root:/minio_root:z
       - ./data/certs:/root/.minio/certs:z
     command: "minio server --console-address :9001 /minio_root"
-    env_file: ./env.minio
+    env_file:
+      - ./env.minio
     restart: always
     networks:
       - ${NETWORKS}
@@ -50,6 +51,8 @@ services:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80
     volumes:
       - ./data/nginx/:/etc/nginx/conf.d/:ro
+    env_file:
+      - ./env.nginx
     restart: always
     depends_on:
       - outline

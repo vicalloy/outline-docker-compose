@@ -43,5 +43,5 @@ function env_replace {
 function env_delete {
     key=$1
     filename=$2
-    sed "/${key}/d" -i env.outline
+    sed "/${key}/d" -i $filename
 }

@@ -43,10 +43,10 @@ function create_outline_env_file {
     env_replace UTILS_SECRET $UTILS_SECRET $env_file
     env_replace DEFAULT_LANGUAGE $DEFAULT_LANGUAGE $env_file
 
-    env_delete DATABASE_URL
-    env_delete DATABASE_URL_TEST
-    env_delete REDIS_URL
-    env_delete AWS_S3_UPLOAD_BUCKET_NAME
+    env_delete DATABASE_URL $env_file
+    env_delete DATABASE_URL_TEST $env_file
+    env_delete REDIS_URL $env_file
+    env_delete AWS_S3_UPLOAD_BUCKET_NAME $env_file
 
     env_replace AWS_ACCESS_KEY_ID $MINIO_ACCESS_KEY $env_file
     env_replace AWS_SECRET_ACCESS_KEY $MINIO_SECRET_KEY $env_file
@@ -58,11 +58,11 @@ function create_oidc_env_file {
     env_file=../$fn
     cp ./templates/$fn $env_file
 
-    env_replace OIDC_CLIENT_ID $OIDC_CLIENT_ID $env_file
-    env_replace OIDC_CLIENT_SECRET $OIDC_CLIENT_SECRET $env_file
-    env_replace OIDC_AUTH_URI $OIDC_AUTH_URI $env_file
-    env_replace OIDC_TOKEN_URI $OIDC_TOKEN_URI $env_file
-    env_replace OIDC_USERINFO_URI $OIDC_USERINFO_URI $env_file
+    env_replace OIDC_CLIENT_ID "$OIDC_CLIENT_ID" $env_file
+    env_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $env_file
+    env_replace OIDC_AUTH_URI "$OIDC_AUTH_URI" $env_file
+    env_replace OIDC_TOKEN_URI "$OIDC_TOKEN_URI" $env_file
+    env_replace OIDC_USERINFO_URI "$OIDC_USERINFO_URI" $env_file
 }
 
 function create_env_files {

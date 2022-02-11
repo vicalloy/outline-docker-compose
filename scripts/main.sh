@@ -73,9 +73,7 @@ function create_env_files {
     create_oidc_env_file
 }
 
-function generate {
+function init_cfg {
     cp ./templates/docker-compose.yml ../docker-compose.yml
     create_env_files
 }
-
-generate

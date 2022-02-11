@@ -11,11 +11,11 @@ NETWORKS=outlinewiki
 NETWORKS_EXTERNAL=false
 
 # OIDC
-OIDC_CLIENT_ID=
-OIDC_CLIENT_SECRET=
-OIDC_AUTH_URI=
-OIDC_TOKEN_URI=
-OIDC_USERINFO_URI=
+OIDC_CLIENT_ID=cid_from_oidc_provider
+OIDC_CLIENT_SECRET=secret_from_oidc_provider
+OIDC_AUTH_URI=http://192.168.x.x:8000/oauth/authorize/
+OIDC_TOKEN_URI=http://192.168.x.x:8000/oauth/token/
+OIDC_USERINFO_URI=http://192.168.x.x:8000/oauth/userinfo/
 OIDC_DISPLAY_NAME=OpenID
 
 # MinIO

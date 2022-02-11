@@ -33,6 +33,7 @@ services:
       - DATABASE_URL=postgres://user:pass@postgres:5432/outline
       - DATABASE_URL_TEST=postgres://user:pass@postgres:5432/outline-test
       - REDIS_URL=redis://redis:6379
+      - AWS_S3_UPLOAD_BUCKET_NAME=outline-bucket
     env_file:
       - ./env.outline
       - ./env.oidc

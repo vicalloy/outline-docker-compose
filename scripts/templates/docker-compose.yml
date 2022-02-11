@@ -51,8 +51,6 @@ services:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80
     volumes:
       - ./data/nginx/:/etc/nginx/conf.d/:ro
-    env_file:
-      - ./env.nginx
     restart: always
     depends_on:
       - outline

@@ -77,3 +77,5 @@ function init_cfg {
     cp ./templates/docker-compose.yml ../docker-compose.yml
     create_env_files
 }
+
+$*

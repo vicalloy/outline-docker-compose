@@ -39,8 +39,8 @@ function create_outline_env_file {
     UTILS_SECRET=`openssl rand -hex 32`
 
     env_replace URL $URL $env_file
-    env_replace SECRET_KEY $SECRET_KEY env.outline
-    env_replace UTILS_SECRET $UTILS_SECRET env.outline
+    env_replace SECRET_KEY $SECRET_KEY $env_file
+    env_replace UTILS_SECRET $UTILS_SECRET $env_file
     env_replace DEFAULT_LANGUAGE $DEFAULT_LANGUAGE $env_file
 
     env_delete DATABASE_URL

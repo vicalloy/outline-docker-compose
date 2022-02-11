@@ -1,6 +1,5 @@
 install:
-	cd ./scripts
-	@bash main.sh init_cfg
+	cd ./scripts && bash ./main.sh init_cfg
 
 start: install
 	docker-compose up -d

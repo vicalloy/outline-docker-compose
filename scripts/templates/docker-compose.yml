@@ -3,6 +3,8 @@ services:
   redis:
     image: redis:latest
     restart: always
+    networks:
+      - ${NETWORKS}
   postgres:
     image: postgres:latest
     environment:

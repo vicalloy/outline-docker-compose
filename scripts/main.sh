@@ -40,15 +40,24 @@ function create_outline_env_file {
     env_replace SECRET_KEY $SECRET_KEY $env_file
     env_replace UTILS_SECRET $UTILS_SECRET $env_file
     env_replace DEFAULT_LANGUAGE $DEFAULT_LANGUAGE $env_file
+    env_replace FORCE_HTTPS $FORCE_HTTPS $env_file
 
     env_delete DATABASE_URL $env_file
     env_delete DATABASE_URL_TEST $env_file
     env_delete REDIS_URL $env_file
     env_delete AWS_S3_UPLOAD_BUCKET_NAME $env_file
 
+    env_delete SLACK_KEY $env_file
+    env_delete SLACK_SECRET $env_file
+    env_delete SLACK_APP_ID $env_file
+    env_delete SLACK_KEY $env_file
+    env_replace SLACK_MESSAGE_ACTIONS false $env_file
+
     env_replace AWS_ACCESS_KEY_ID $MINIO_ACCESS_KEY $env_file
     env_replace AWS_SECRET_ACCESS_KEY $MINIO_SECRET_KEY $env_file
     env_replace AWS_S3_UPLOAD_BUCKET_URL $URL $env_file
+
+    env_add PGSSLMODE disable $env_file
 }
 
 function create_oidc_env_file {

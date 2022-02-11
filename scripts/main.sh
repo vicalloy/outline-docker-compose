@@ -7,7 +7,7 @@ MINIO_ACCESS_KEY=`openssl rand -hex 8`
 MINIO_SECRET_KEY=`openssl rand -hex 32`
 
 function create_global_env_file {
-    fn = .env
+    fn=.env
     env_file=../$fn
     cp ./templates/$fn $env_file
     env_replace NETWORKS $NETWORKS $env_file

@@ -52,7 +52,7 @@ services:
     ports:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80
     volumes:
-      - ./data/nginx/:/etc/nginx/conf.d/:ro
+      - ./config/nginx/:/etc/nginx/conf.d/:ro
     restart: always
     depends_on:
       - outline

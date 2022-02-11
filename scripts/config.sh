@@ -1,0 +1,5 @@
+DOMAIN=localhost
+PORT=8888
+
+NETWORKS=outlinewiki
+NETWORKS_EXTERNAL=false

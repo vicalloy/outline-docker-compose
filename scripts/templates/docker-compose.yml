@@ -1,0 +1,59 @@
+version: "3"
+services:
+  redis:
+    image: redis:latest
+    restart: always
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: outline
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - ${NETWORKS}
+  minio:
+    image: minio/minio:latest
+    ports:
+      - ${MINIO_HTTP_IP}:${MINIO_HTTP_PORT}:9001
+    volumes:
+      - ./data/minio_root:/minio_root:z
+      - ./data/certs:/root/.minio/certs:z
+    command: "minio server --console-address :9001 /minio_root"
+    env_file: ./env.minio
+    restart: always
+    networks:
+      - ${NETWORKS}
+  outline:
+    image: outlinewiki/outline:latest
+    command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
+    environment:
+      - DATABASE_URL=postgres://user:pass@postgres:5432/outline
+      - DATABASE_URL_TEST=postgres://user:pass@postgres:5432/outline-test
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - ./env.outline
+      - ./env.oidc
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - minio
+    networks:
+      - ${NETWORKS}
+  nginx:
+    image: nginx
+    ports:
+      - ${HTTP_IP}:${HTTP_PORT_IP}:80
+    volumes:
+      - ./data/nginx/:/etc/nginx/conf.d/:ro
+    restart: always
+    depends_on:
+      - outline
+    networks:
+      - ${NETWORKS}
+networks:
+  ${NETWORKS}:
+    external: ${NETWORKS_EXTERNAL}

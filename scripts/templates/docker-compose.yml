@@ -47,6 +47,15 @@ services:
       - minio
     networks:
       - ${NETWORKS}
+  oidc-server:
+    image: vicalloy/oidc-server
+    volumes:
+      - ./data/uc_db:/app/db:z
+    restart: always
+    env_file:
+      - ./env.oidc-server
+    networks:
+      - ${NETWORKS}
   nginx:
     image: nginx
     ports:
@@ -54,8 +63,6 @@ services:
     volumes:
       - ./config/nginx/:/etc/nginx/conf.d/:ro
     restart: always
-    depends_on:
-      - outline
     networks:
       - ${NETWORKS}
 networks:

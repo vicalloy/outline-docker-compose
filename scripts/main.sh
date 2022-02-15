@@ -72,11 +72,21 @@ function create_oidc_env_file {
     env_replace OIDC_USERINFO_URI "$OIDC_USERINFO_URI" $env_file
 }
 
+function create_uc_env_file {
+    fn=env.oidc-server
+    env_file=../$fn
+    cp ./templates/$fn $env_file
+
+    env_replace LANGUAGE_CODE "$DEFAULT_LANGUAGE" $env_file
+    env_replace TIME_ZONE "$TIME_ZONE" $env_file
+}
+
 function create_env_files {
     create_global_env_file
     create_minio_env_file
     create_outline_env_file
     create_oidc_env_file
+    create_uc_env_file
 }
 
 function create_docker_compose_file {

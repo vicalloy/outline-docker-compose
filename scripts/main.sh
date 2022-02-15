@@ -5,8 +5,7 @@
 
 MINIO_ACCESS_KEY=`openssl rand -hex 8`
 MINIO_SECRET_KEY=`openssl rand -hex 32`
-# OIDC_CLIENT_SECRET=`openssl rand -hex 56`
-OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET:-`openssl rand -hex 56`}
+OIDC_CLIENT_SECRET=`openssl rand -hex 56`
 
 function create_global_env_file {
     fn=.env
@@ -68,11 +67,10 @@ function create_oidc_env_file {
     cp ./templates/$fn $env_file
 
     env_replace OIDC_CLIENT_ID "$OIDC_CLIENT_ID" $env_file
-    # TODO if blank
     env_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $env_file
-    env_replace OIDC_AUTH_URI "$OIDC_AUTH_URI" $env_file
-    env_replace OIDC_TOKEN_URI "$OIDC_TOKEN_URI" $env_file
-    env_replace OIDC_USERINFO_URI "$OIDC_USERINFO_URI" $env_file
+    env_replace OIDC_AUTH_URI "${URL}/uc/oauth/authorize/" $env_file
+    env_replace OIDC_TOKEN_URI "${URL}/uc/oauth/token/" $env_file
+    env_replace OIDC_USERINFO_URI "${URL}/uc/oauth/userinfo/" $env_file
 }
 
 function create_uc_env_file {

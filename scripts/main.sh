@@ -5,6 +5,8 @@
 
 MINIO_ACCESS_KEY=`openssl rand -hex 8`
 MINIO_SECRET_KEY=`openssl rand -hex 32`
+# OIDC_CLIENT_SECRET=`openssl rand -hex 56`
+OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET:-`openssl rand -hex 56`}
 
 function create_global_env_file {
     fn=.env
@@ -66,6 +68,7 @@ function create_oidc_env_file {
     cp ./templates/$fn $env_file
 
     env_replace OIDC_CLIENT_ID "$OIDC_CLIENT_ID" $env_file
+    # TODO if blank
     env_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $env_file
     env_replace OIDC_AUTH_URI "$OIDC_AUTH_URI" $env_file
     env_replace OIDC_TOKEN_URI "$OIDC_TOKEN_URI" $env_file
@@ -83,12 +86,22 @@ function create_uc_env_file {
     env_replace SECRET_KEY "$DJANGO_SECRET_KEY" $env_file
 }
 
+function create_uc_db_init_file {
+    fn=oidc-server-outline-client.json
+    file=../config/uc/fixtures/$fn
+    cp ./templates/$fn $file
+
+    env_tmpl_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $file
+    env_tmpl_replace URL "$URL" $file
+}
+
 function create_env_files {
     create_global_env_file
     create_minio_env_file
     create_outline_env_file
     create_oidc_env_file
     create_uc_env_file
+    create_uc_db_init_file
 }
 
 function create_docker_compose_file {

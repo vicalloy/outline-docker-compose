@@ -14,10 +14,10 @@ NETWORKS_EXTERNAL=false
 
 # OIDC
 OIDC_CLIENT_ID=cid_from_oidc_provider
-OIDC_CLIENT_SECRET=secret_from_oidc_provider
-OIDC_AUTH_URI=http://192.168.x.x/uc/oauth/authorize/
-OIDC_TOKEN_URI=http://192.168.x.x/uc/oauth/token/
-OIDC_USERINFO_URI=http://192.168.x.x/uc/oauth/userinfo/
+OIDC_CLIENT_SECRET=
+OIDC_AUTH_URI=http://192.168.x.x:8888/uc/oauth/authorize/
+OIDC_TOKEN_URI=http://192.168.x.x:8888/uc/oauth/token/
+OIDC_USERINFO_URI=http://192.168.x.x:8888/uc/oauth/userinfo/
 OIDC_DISPLAY_NAME=OpenID
 
 # MinIO

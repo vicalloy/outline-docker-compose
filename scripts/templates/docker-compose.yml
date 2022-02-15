@@ -50,7 +50,9 @@ services:
   oidc-server:
     image: vicalloy/oidc-server
     volumes:
-      - ./data/uc_db:/app/db:z
+      - ./config/uc/fixtures:/app/oidc_server/fixtures:z
+      - ./data/uc/db:/app/db:z
+      - ./data/uc/static_root:/app/static_root:z
     restart: always
     env_file:
       - ./env.oidc-server
@@ -62,6 +64,7 @@ services:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80
     volumes:
       - ./config/nginx/:/etc/nginx/conf.d/:ro
+      - ./data/uc/static_root:/uc/static_root:z
     restart: always
     networks:
       - ${NETWORKS}

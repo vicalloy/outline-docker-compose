@@ -1,0 +1,32 @@
+[
+{
+ "model": "oidc_provider.client",
+ "pk": 1,
+ "fields": {
+  "name": "outline",
+  "owner": null,
+  "client_type": "confidential",
+  "client_id": "050984",
+  "client_secret": "${OIDC_CLIENT_SECRET}",
+  "jwt_alg": "RS256",
+  "date_created": "2022-02-15",
+  "website_url": "",
+  "terms_url": "",
+  "contact_email": "",
+  "logo": "",
+  "reuse_consent": true,
+  "require_consent": true,
+  "_redirect_uris": "${URL}/auth/oidc.callback",
+  "_post_logout_redirect_uris": "",
+  "_scope": "",
+  "response_types": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ }
+}
+]

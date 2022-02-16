@@ -1,4 +1,4 @@
-oidc_server_container=outline-docker-compose_oidc-server_1
+oidc_server_container=outline-docker-compose_wk-oidc-server_1
 
 install:
 	cd ./scripts && bash ./main.sh init_cfg

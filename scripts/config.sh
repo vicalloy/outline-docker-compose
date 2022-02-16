@@ -6,3 +6,7 @@ FORCE_HTTPS=false
 # Nginx
 HTTP_IP=127.0.0.1
 HTTP_PORT_IP=8888
+
+# Docker
+NETWORKS=outlinewiki
+NETWORKS_EXTERNAL=false

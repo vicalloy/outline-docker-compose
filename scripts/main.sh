@@ -105,7 +105,7 @@ function create_docker_compose_file {
 
     env_tmpl_replace NETWORKS "$NETWORKS" $file
     env_tmpl_replace MINIO_ACCESS_KEY "$MINIO_ACCESS_KEY" $file
-    env_tmpl_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $file
+    env_tmpl_replace MINIO_SECRET_KEY "$MINIO_SECRET_KEY" $file
 }
 
 function init_cfg {

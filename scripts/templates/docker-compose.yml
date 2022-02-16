@@ -77,7 +77,7 @@ services:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80
     volumes:
       - ./config/nginx/:/etc/nginx/conf.d/:ro
-      - ./data/uc/static_root:/uc/static_root:z
+      - ./data/uc/static_root:/uc/static_root:ro
     restart: always
     networks:
       - ${NETWORKS}

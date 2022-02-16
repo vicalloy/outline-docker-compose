@@ -41,7 +41,7 @@ services:
       exit 0;
       "
     networks:
-      - outlinewiki
+      - ${NETWORKS}
   wk-outline:
     image: outlinewiki/outline:latest
     command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"

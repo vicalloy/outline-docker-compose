@@ -18,9 +18,6 @@ function create_global_env_file {
     # NGINX
     env_replace HTTP_IP $HTTP_IP $env_file
     env_replace HTTP_PORT_IP $HTTP_PORT_IP $env_file
-    # MINIO
-    env_replace MINIO_HTTP_IP $MINIO_HTTP_IP $env_file
-    env_replace MINIO_HTTP_PORT $MINIO_HTTP_PORT $env_file
 }
 
 function create_minio_env_file {
@@ -68,7 +65,6 @@ function create_oidc_env_file {
     env_file=../$fn
     cp ./templates/$fn $env_file
 
-    env_replace OIDC_CLIENT_ID "$OIDC_CLIENT_ID" $env_file
     env_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $env_file
     env_replace OIDC_AUTH_URI "${URL}/uc/oauth/authorize/" $env_file
     env_replace OIDC_TOKEN_URI "${URL}/uc/oauth/token/" $env_file

@@ -18,17 +18,30 @@ services:
       - ${NETWORKS}
   minio:
     image: minio/minio:latest
-    ports:
-      - ${MINIO_HTTP_IP}:${MINIO_HTTP_PORT}:9001
     volumes:
       - ./data/minio_root:/minio_root:z
       - ./data/certs:/root/.minio/certs:z
-    command: "minio server --console-address :9001 /minio_root"
+    command: "minio server /minio_root"
     env_file:
       - ./env.minio
     restart: always
     networks:
       - ${NETWORKS}
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    env_file:
+      - ./env.minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY}) do echo '...waiting...' && sleep 1; done;
+      /usr/bin/mc mb minio/outline-bucket;
+      /usr/bin/mc policy set download minio/outline-bucket;
+      exit 0;
+      "
+    networks:
+      - outlinewiki
   outline:
     image: outlinewiki/outline:latest
     command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"

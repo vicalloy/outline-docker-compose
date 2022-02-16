@@ -1,10 +1,10 @@
-URL=http://localhost:8888
+URL=http://192.168.x.x:8888
 DEFAULT_LANGUAGE=en_US
 TIME_ZONE=UTC
 FORCE_HTTPS=false
 
 # Nginx
-HTTP_IP=127.0.0.1
+HTTP_IP=192.168.x.x
 HTTP_PORT_IP=8888
 
 # Docker

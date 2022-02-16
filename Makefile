@@ -22,4 +22,7 @@ clean-docker: stop
 clean-conf:
 	rm -rfv env.* .env docker-compose.yml config/uc/fixtures/*.json
 
+clean-data:
+	rm -rfv ./data/certs ./data/minio_root ./data/pgdata ./data/uc
+
 clean: clean-docker clean-conf

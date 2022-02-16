@@ -34,7 +34,7 @@ FORCE_HTTPS=false
 
 # Nginx
 # The nginx bind ip and port.
-# If you use ip address to access outline, this ip and port should be same as URL.
+# If you use ip address to access outline, this ip and port should be same as the URL.
 # If this server behind a proxy(nginx), you can bind to `127.0.0.1` .
 HTTP_IP=192.168.x.x
 HTTP_PORT_IP=8888

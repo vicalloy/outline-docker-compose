@@ -1,11 +1,11 @@
 version: "3"
 services:
-  redis:
+  wk-redis:
     image: redis:latest
     restart: always
     networks:
       - ${NETWORKS}
-  postgres:
+  wk-postgres:
     image: postgres:latest
     environment:
       POSTGRES_USER: user
@@ -16,7 +16,7 @@ services:
     restart: always
     networks:
       - ${NETWORKS}
-  minio:
+  wk-minio:
     image: minio/minio:latest
     volumes:
       - ./data/minio_root:/minio_root:z
@@ -27,40 +27,40 @@ services:
     restart: always
     networks:
       - ${NETWORKS}
-  createbuckets:
+  wk-createbuckets:
     image: minio/mc
     depends_on:
-      - minio
+      - wk-minio
     env_file:
       - ./env.minio
     entrypoint: >
       /bin/sh -c "
-      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ACCESS_KEY} ${OIDC_CLIENT_SECRET}) do echo '...waiting...' && sleep 1; done;
+      until (/usr/bin/mc config host add minio http://wk-minio:9000 ${MINIO_ACCESS_KEY} ${OIDC_CLIENT_SECRET}) do echo '...waiting...' && sleep 1; done;
       /usr/bin/mc mb minio/outline-bucket;
       /usr/bin/mc policy set download minio/outline-bucket;
       exit 0;
       "
     networks:
       - outlinewiki
-  outline:
+  wk-outline:
     image: outlinewiki/outline:latest
     command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
     environment:
-      - DATABASE_URL=postgres://user:pass@postgres:5432/outline
-      - DATABASE_URL_TEST=postgres://user:pass@postgres:5432/outline-test
-      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgres://user:pass@wk-postgres:5432/outline
+      - DATABASE_URL_TEST=postgres://user:pass@wk-postgres:5432/outline-test
+      - REDIS_URL=redis://wk-redis:6379
       - AWS_S3_UPLOAD_BUCKET_NAME=outline-bucket
     env_file:
       - ./env.outline
       - ./env.oidc
     restart: always
     depends_on:
-      - postgres
-      - redis
-      - minio
+      - wk-postgres
+      - wk-redis
+      - wk-minio
     networks:
       - ${NETWORKS}
-  oidc-server:
+  wk-oidc-server:
     image: vicalloy/oidc-server
     volumes:
       - ./config/uc/fixtures:/app/oidc_server/fixtures:z
@@ -71,7 +71,7 @@ services:
       - ./env.oidc-server
     networks:
       - ${NETWORKS}
-  nginx:
+  wk-nginx:
     image: nginx
     ports:
       - ${HTTP_IP}:${HTTP_PORT_IP}:80

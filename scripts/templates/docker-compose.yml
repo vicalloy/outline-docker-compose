@@ -35,7 +35,7 @@ services:
       - ./env.minio
     entrypoint: >
       /bin/sh -c "
-      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY}) do echo '...waiting...' && sleep 1; done;
+      until (/usr/bin/mc config host add minio http://minio:9000 ${MINIO_ACCESS_KEY} ${OIDC_CLIENT_SECRET}) do echo '...waiting...' && sleep 1; done;
       /usr/bin/mc mb minio/outline-bucket;
       /usr/bin/mc policy set download minio/outline-bucket;
       exit 0;

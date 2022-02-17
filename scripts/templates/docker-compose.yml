@@ -79,6 +79,10 @@ services:
       - ./config/nginx/:/etc/nginx/conf.d/:ro
       - ./data/uc/static_root:/uc/static_root:ro
     restart: always
+    depends_on:
+      - wk-minio
+      - wk-outline
+      - wk-oidc-server
     networks:
       - ${NETWORKS}
 networks:

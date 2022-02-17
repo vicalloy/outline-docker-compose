@@ -25,7 +25,7 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
 ### scripts/config.sh
 
 ```
-# The url used to vist the web site.
+# The url used to vist this web site.
 # The url should be accessible in host machine and docker container(Can't be localhost or 127.0.0.1).
 URL=http://192.168.x.x:8888
 # The default interface language. See translate.getoutline.com for a list of
@@ -46,7 +46,7 @@ HTTP_PORT_IP=8888
 
 # Docker
 # If you server behind a proxy(nginx), and the proxy created by docker. You can use the proxy's network. Set the `NETWORKS` to proxy's network name, and set `NETWORKS_EXTERNAL` to `true` .
-# The sample config for host nginx can be find in `config/demo/nginx_proxy_demo.conf`.
+# The sample config for host nginx can be find in `config/sample/nginx_outline.conf`.
 NETWORKS=outlinewiki
 NETWORKS_EXTERNAL=false
 ```

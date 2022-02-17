@@ -5,7 +5,7 @@
 
 MINIO_ACCESS_KEY=`openssl rand -hex 8`
 MINIO_SECRET_KEY=`openssl rand -hex 32`
-OIDC_CLIENT_SECRET=`openssl rand -hex 32`
+OIDC_CLIENT_SECRET=`openssl rand -hex 28`
 
 function create_global_env_file {
     fn=.env

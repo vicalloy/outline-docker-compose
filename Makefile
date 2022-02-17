@@ -10,6 +10,10 @@ init-uc:
 start: install
 	docker-compose up -d
 
+restart:
+	docker-compose stop
+	docker-compose up -d
+
 logs:
 	docker-compose logs -f
 

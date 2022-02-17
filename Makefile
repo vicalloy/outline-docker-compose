@@ -1,11 +1,11 @@
-oidc_server_container=outline-docker-compose_wk-oidc-server_1
+oidc_server_container=wk-oidc-server
 
 install:
 	cd ./scripts && bash ./main.sh init_cfg
 
 init-uc:
-	docker exec -it ${oidc_server_container} bash -c "make init"
-	docker exec -it ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
+	docker-compose exec ${oidc_server_container} bash -c "make init"
+	docker-compose exec ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
 
 start: install
 	docker-compose up -d

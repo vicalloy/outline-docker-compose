@@ -4,6 +4,7 @@ URL=http://192.168.x.x:8888
 DEFAULT_LANGUAGE=en_US
 # https://docs.djangoproject.com/en/2.2/ref/settings/#language-code
 LANGUAGE_CODE=en-us
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 TIME_ZONE=UTC
 FORCE_HTTPS=false
 

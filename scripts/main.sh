@@ -74,7 +74,7 @@ function create_uc_env_file {
     env_file=../$fn
     cp ./templates/$fn $env_file
 
-    env_replace LANGUAGE_CODE "$DEFAULT_LANGUAGE" $env_file
+    env_replace LANGUAGE_CODE "$LANGUAGE_CODE" $env_file
     env_replace TIME_ZONE "$TIME_ZONE" $env_file
     DJANGO_SECRET_KEY=`openssl rand -hex 32`
     env_replace SECRET_KEY "$DJANGO_SECRET_KEY" $env_file

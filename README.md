@@ -28,7 +28,11 @@ Install a self-hosted Outline wiki instance in a couple of minutes.
 # The url used to vist the web site.
 # The url should be accessible in host machine and docker container(Can't be localhost or 127.0.0.1).
 URL=http://192.168.x.x:8888
+# The default interface language. See translate.getoutline.com for a list of
+# available language codes and their rough percentage translated.
 DEFAULT_LANGUAGE=en_US
+# https://docs.djangoproject.com/en/2.2/ref/settings/#language-code
+LANGUAGE_CODE=en-us
 TIME_ZONE=UTC
 FORCE_HTTPS=false
 

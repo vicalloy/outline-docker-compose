@@ -3,9 +3,22 @@
 . ./config.sh
 . ./utils.sh
 
-MINIO_ACCESS_KEY=`openssl rand -hex 8`
-MINIO_SECRET_KEY=`openssl rand -hex 32`
-OIDC_CLIENT_SECRET=`openssl rand -hex 28`
+# update config file
+MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-`openssl rand -hex 8`}
+MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-`openssl rand -hex 32`}
+OIDC_CLIENT_SECRET=${MINIO_SECRET_KEY:-`openssl rand -hex 28`}
+OUTLINE_SECRET_KEY=${OUTLINE_SECRET_KEY:-`openssl rand -hex 32`}
+OUTLINE_UTILS_SECRET=${OUTLINE_UTILS_SECRET:-`openssl rand -hex 32`}
+DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY:-`openssl rand -hex 32`}
+
+function update_config_file {
+    env_replace MINIO_ACCESS_KEY $MINIO_ACCESS_KEY config.sh
+    env_replace MINIO_SECRET_KEY $MINIO_SECRET_KEY config.sh
+    env_replace OIDC_CLIENT_SECRET $OIDC_CLIENT_SECRET config.sh
+    env_replace OUTLINE_SECRET_KEY $OUTLINE_SECRET_KEY config.sh
+    env_replace OUTLINE_UTILS_SECRET $OUTLINE_UTILS_SECRET config.sh
+    env_replace DJANGO_SECRET_KEY $DJANGO_SECRET_KEY config.sh
+}
 
 function create_global_env_file {
     fn=.env
@@ -31,12 +44,9 @@ function create_outline_env_file {
     env_file=../$fn
     cp ./templates/$fn $env_file
 
-    SECRET_KEY=`openssl rand -hex 32`
-    UTILS_SECRET=`openssl rand -hex 32`
-
     env_replace URL $URL $env_file
-    env_replace SECRET_KEY $SECRET_KEY $env_file
-    env_replace UTILS_SECRET $UTILS_SECRET $env_file
+    env_replace SECRET_KEY $OUTLINE_SECRET_KEY $env_file
+    env_replace UTILS_SECRET $OUTLINE_UTILS_SECRET $env_file
     env_replace DEFAULT_LANGUAGE $DEFAULT_LANGUAGE $env_file
     env_replace FORCE_HTTPS $FORCE_HTTPS $env_file
 
@@ -74,7 +84,6 @@ function create_uc_env_file {
 
     env_replace LANGUAGE_CODE "$LANGUAGE_CODE" $env_file
     env_replace TIME_ZONE "$TIME_ZONE" $env_file
-    DJANGO_SECRET_KEY=`openssl rand -hex 32`
     env_replace SECRET_KEY "$DJANGO_SECRET_KEY" $env_file
 }
 
@@ -107,6 +116,7 @@ function create_docker_compose_file {
 }
 
 function init_cfg {
+    update_config_file
     create_docker_compose_file
     create_env_files
 }

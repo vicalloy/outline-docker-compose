@@ -21,3 +21,12 @@ HTTP_PORT_IP=8888
 # The sample config for host nginx can be find in `config/sample/nginx_outline.conf`.
 NETWORKS=outlinewiki
 NETWORKS_EXTERNAL=false
+
+# Secret keys, update by script
+# you shouldn't edit it
+MINIO_ACCESS_KEY=
+MINIO_SECRET_KEY=
+OIDC_CLIENT_SECRET=
+OUTLINE_SECRET_KEY=
+OUTLINE_UTILS_SECRET=
+DJANGO_SECRET_KEY=

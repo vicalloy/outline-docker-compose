@@ -20,8 +20,8 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
     make start  # create docker-compose config file and start it.
     make init-uc  # Initializing the oidc-server(add oidc client for outline and create a superuser).
     ```
-1. Open `https://192.168.x.x:8888` and login to outline.
-1. Open `https://192.168.x.x:8888/uc/admin/auth/user/` to add new user.
+1. Open `https://127.0.0.1:8888` and login to outline.
+1. Open `https://127.0.0.1:8888/uc/admin/auth/user/` to add new user.
 
 ### scripts/config.sh
 

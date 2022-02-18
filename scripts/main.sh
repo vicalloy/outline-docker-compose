@@ -65,8 +65,6 @@ function create_oidc_env_file {
 
     env_replace OIDC_CLIENT_SECRET "$OIDC_CLIENT_SECRET" $env_file
     env_replace OIDC_AUTH_URI "${URL}/uc/oauth/authorize/" $env_file
-    env_replace OIDC_TOKEN_URI "${URL}/uc/oauth/token/" $env_file
-    env_replace OIDC_USERINFO_URI "${URL}/uc/oauth/userinfo/" $env_file
 }
 
 function create_uc_env_file {

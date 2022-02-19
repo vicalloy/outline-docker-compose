@@ -23,6 +23,6 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
 1. Open `https://127.0.0.1:8888` and login to outline
 1. Open `https://127.0.0.1:8888/uc/admin/auth/user/` to add new user
 
-### scripts/config.sh
+## scripts/config.sh
 
 The config file [scripts/config.sh.sample](scripts/config.sh.sample)

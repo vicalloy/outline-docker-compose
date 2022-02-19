@@ -20,42 +20,9 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
     make start  # create docker-compose config file and start it.
     make init-uc  # Initializing the oidc-server(add oidc client for outline and create a superuser).
     ```
-1. Open `https://127.0.0.1:8888` and login to outline.
-1. Open `https://127.0.0.1:8888/uc/admin/auth/user/` to add new user.
+1. Open `https://127.0.0.1:8888` and login to outline
+1. Open `https://127.0.0.1:8888/uc/admin/auth/user/` to add new user
 
 ### scripts/config.sh
 
-```
-# The url used to vist this web site.
-URL=http://127.0.0.1:8888
-# The default interface language. See translate.getoutline.com for a list of
-# available language codes and their rough percentage translated.
-DEFAULT_LANGUAGE=en_US
-# https://docs.djangoproject.com/en/2.2/ref/settings/#language-code
-LANGUAGE_CODE=en-us
-# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-TIME_ZONE=UTC
-FORCE_HTTPS=false
-
-# Nginx
-# The nginx bind ip and port.
-# If you use ip address to access outline, this ip and port should be same as the URL.
-# If this server behind a proxy(nginx), you can bind to `127.0.0.1` .
-HTTP_IP=127.0.0.1
-HTTP_PORT_IP=8888
-
-# Docker
-# If you server behind a proxy(nginx), and the proxy created by docker. You can use the proxy's network. Set the `NETWORKS` to proxy's network name, and set `NETWORKS_EXTERNAL` to `true` .
-# The sample config for host nginx can be find in `config/sample/nginx_outline.conf`.
-NETWORKS=outlinewiki
-NETWORKS_EXTERNAL=false
-
-# Secret keys, update by script
-# you shouldn't edit it
-MINIO_ACCESS_KEY=
-MINIO_SECRET_KEY=
-OIDC_CLIENT_SECRET=
-OUTLINE_SECRET_KEY=
-OUTLINE_UTILS_SECRET=
-DJANGO_SECRET_KEY=
-```
+The config file [scripts/config.sh.sample](scripts/config.sh.sample)

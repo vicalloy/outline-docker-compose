@@ -20,6 +20,9 @@ logs:
 stop:
 	docker-compose down || true
 
+update-images:
+	docker-compose pull
+
 clean-docker: stop
 	docker-compose rm -fsv || true
 

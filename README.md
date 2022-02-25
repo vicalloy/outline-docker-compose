@@ -26,3 +26,9 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
 ## scripts/config.sh
 
 The config file [scripts/config.sh.sample](scripts/config.sh.sample)
+
+## FQA
+
+1. Q: Added a new user, but can't login the outline
+    - You should add a email for the new user
+    - If the domain in the email is not same as admin user's domain, you should add the domain to settings `ALLOWED_DOMAINS`

@@ -3,13 +3,12 @@ oidc_server_container=wk-oidc-server
 gen-conf:
 	cd ./scripts && bash ./main.sh init_cfg
 
-install: gen-conf
-	docker-compose up -d
-	docker-compose exec ${oidc_server_container} bash -c "make init"
-	docker-compose exec ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
-
 start:
 	docker-compose up -d
+
+install: gen-conf start
+	docker-compose exec ${oidc_server_container} bash -c "make init"
+	docker-compose exec ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
 
 restart: stop start
 

@@ -40,3 +40,5 @@ The config file [scripts/config.sh.sample](scripts/config.sh.sample)
 1. Q: Added a new user, but can't login the outline
     - You should add a email for the new user
     - If the domain in the email is not same as admin user's domain, you should add the domain to settings `ALLOWED_DOMAINS`
+1. Q: Impossible to connect to outline (502 error) but the django administation panel is available
+    - Outline's docker image don't support ARM platform. If you use ARM, you should build outline's image by youself.

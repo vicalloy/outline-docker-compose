@@ -35,7 +35,7 @@ The config file [scripts/config.sh.sample](scripts/config.sh.sample)
 - `make clean-data` ⚠️ You will lost all your data
 
 
-## FQA
+## FAQ
 
 1. Q: Added a new user, but can't login the outline
     - You should add a email for the new user

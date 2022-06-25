@@ -9,6 +9,7 @@ start:
 install: gen-conf start
 	docker-compose exec ${oidc_server_container} bash -c "make init"
 	docker-compose exec ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
+	docker-compose exec wk-nginx nginx -s reload
 
 restart: stop start
 

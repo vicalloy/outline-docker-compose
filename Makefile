@@ -5,6 +5,8 @@ gen-conf:
 
 start:
 	docker-compose up -d
+	sleep 1
+	docker-compose exec wk-nginx nginx -s reload
 
 install: gen-conf start
 	docker-compose exec ${oidc_server_container} bash -c "make init"

@@ -5,6 +5,7 @@ gen-conf:
 
 start:
 	docker-compose up -d
+	cd ./scripts && bash ./main.sh reload_nginx
 
 install: gen-conf start
 	sleep 1

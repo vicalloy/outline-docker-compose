@@ -122,4 +122,13 @@ function init_cfg {
     create_env_files
 }
 
+function reload_nginx {
+    cd ..;
+    until docker-compose exec wk-nginx nginx -s reload
+    do
+        echo "waiting nginx"
+        sleep 1
+    done
+}
+
 $*

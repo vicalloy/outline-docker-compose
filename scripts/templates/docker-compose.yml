@@ -6,7 +6,7 @@ services:
     networks:
       - ${NETWORKS}
   wk-postgres:
-    image: postgres:latest
+    image: postgres:${POSTGRES_VERSION}
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
@@ -43,7 +43,7 @@ services:
     networks:
       - ${NETWORKS}
   wk-outline:
-    image: outlinewiki/outline:latest
+    image: outlinewiki/outline:${OUTLINE_VERSION}
     command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
     environment:
       - DATABASE_URL=postgres://user:pass@wk-postgres:5432/outline

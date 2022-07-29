@@ -29,6 +29,9 @@ function create_global_env_file {
     # NGINX
     env_replace HTTP_IP $HTTP_IP $env_file
     env_replace HTTP_PORT_IP $HTTP_PORT_IP $env_file
+    # Docker image version
+    env_replace OUTLINE_VERSION $OUTLINE_VERSION $env_file
+    env_replace POSTGRES_VERSION $POSTGRES_VERSION $env_file
 }
 
 function create_minio_env_file {

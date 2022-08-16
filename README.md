@@ -40,3 +40,8 @@ The config file [scripts/config.sh.sample](scripts/config.sh.sample)
 1. Q: Added a new user, but can't login the outline
     - You should add a email for the new user
     - If the domain in the email is not same as admin user's domain, you should add the domain to settings `ALLOWED_DOMAINS`
+
+
+### Infrastructure model
+
+![Insfrastructure model](.infragenie/infrastructure_model.png)

@@ -25,6 +25,11 @@ if [ "$(uname)" == "Darwin" ]; then
     fi
 fi
 
+if ! command -v docker-compose &> /dev/null
+then
+    alias docker-compose="docker compose"
+fi
+
 function env_add {
     key=$1
     val=$2

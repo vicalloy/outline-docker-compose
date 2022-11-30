@@ -13,17 +13,6 @@ if [ "$(uname)" == "Darwin" ]; then
         alias sed=gsed
     fi
 fi
-if [ "$(uname)" == "Darwin" ]; then
-    if ! command -v gsed &> /dev/null
-    then
-        # https://unix.stackexchange.com/a/131940
-        echo "sed commands here are tested only with GNU sed"
-        echo "Installing gnu-sed"
-        brew install gnu-sed
-    else
-        alias sed=gsed
-    fi
-fi
 
 if ! command -v docker-compose &> /dev/null
 then

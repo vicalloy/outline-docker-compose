@@ -44,7 +44,7 @@ services:
       - ${NETWORKS}
   wk-outline:
     image: outlinewiki/outline:${OUTLINE_VERSION}
-    command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
+    command: sh -c "yarn db:migrate --env production-ssl-disabled && yarn start"
     environment:
       - DATABASE_URL=postgres://user:pass@wk-postgres:5432/outline
       - DATABASE_URL_TEST=postgres://user:pass@wk-postgres:5432/outline-test

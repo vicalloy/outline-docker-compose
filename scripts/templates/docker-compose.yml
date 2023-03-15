@@ -17,7 +17,7 @@ services:
     networks:
       - ${NETWORKS}
   wk-minio:
-    image: minio/minio:RELEASE.2022-11-17T23-20-09Z
+    image: minio/minio:${MINIO_VERSION}
     volumes:
       - ./data/minio_root:/minio_root:z
       - ./data/certs:/root/.minio/certs:z
@@ -28,7 +28,7 @@ services:
     networks:
       - ${NETWORKS}
   wk-createbuckets:
-    image: minio/mc:RELEASE.2022-11-17T21-20-39Z
+    image: minio/mc:${MINIO_MC_VERSION}
     depends_on:
       - wk-minio
     env_file:

@@ -4,23 +4,23 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
 
 ## Features:
 
-1. A simple make and bash script to help you generate all the conf required
-1. A docker-compose to run your service
-1. Use [MinIO](https://github.com/minio/minio) instead of AWS S3, so that everything is really self-hosted
-1. A [OIDC server](https://github.com/vicalloy/oidc-server) to manage user, no need to login via slack or google
+1. A simple make and bash script to help you generate all the conf required.
+1. A docker-compose to run your service.
+1. Use [MinIO](https://github.com/minio/minio) instead of AWS S3, so that everything is really self-hosted.
+1. A [OIDC server](https://github.com/vicalloy/oidc-server) to manage users, no need to login via Slack or Google.
 
 ## How to use
 
-1. Initializing the system
+1. Initializing the system.
     ```
     git clone https://github.com/vicalloy/outline-docker-compose.git
     cd outline-docker-compose
     cp scripts/config.sh.sample scripts/config.sh
     # update config file: vim scripts/config.sh
-    make install  # create docker-compose config file and start it. Initializing the oidc-server(add oidc client for outline and create a superuser).
+    make install  # Create a docker-compose config file and start it. Initializing the oidc-server(add oidc client for outline and create a superuser).
     ```
-1. Open `http://127.0.0.1:8888` and login to outline
-1. Open `http://127.0.0.1:8888/uc/admin/auth/user/` to add new user
+1. Open `http://127.0.0.1:8888` and login to outline.
+1. Open `http://127.0.0.1:8888/uc/admin/auth/user/` to add new users.
 
 ## scripts/config.sh
 
@@ -38,5 +38,5 @@ The config file [scripts/config.sh.sample](scripts/config.sh.sample)
 ## FAQ
 
 1. Q: Added a new user, but can't login the outline
-    - You should add a email for the new user
-    - If the domain in the email is not same as admin user's domain, you should add the domain to settings `ALLOWED_DOMAINS`
+    - You should add an email for the new user
+    - If the domain in the email is not the same as the admin user's domain, you should add the domain to the settings `ALLOWED_DOMAINS`

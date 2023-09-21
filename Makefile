@@ -14,6 +14,7 @@ install: gen-conf start
 	${docker-compose} exec ${oidc_server_container} bash -c "make init"
 	${docker-compose} exec ${oidc_server_container} bash -c "python manage.py loaddata oidc-server-outline-client"
 	cd ./scripts && bash ./main.sh reload_nginx
+	chown 1001 ./data/outline #temp fix until outline image is updated. see https://github.com/outline/outline/issues/5716#issuecomment-1729862983
 
 restart: stop start
 
@@ -33,6 +34,6 @@ clean-conf:
 	rm -rfv env.* .env docker-compose.yml config/uc/fixtures/*.json
 
 clean-data: clean-docker
-	rm -rfv ./data/certs ./data/minio_root ./data/pgdata ./data/uc
+	rm -rfv ./data/certs ./data/outline ./data/pgdata ./data/uc
 
 clean: clean-docker clean-conf

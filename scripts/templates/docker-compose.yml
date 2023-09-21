@@ -16,32 +16,6 @@ services:
     restart: always
     networks:
       - ${NETWORKS}
-  wk-minio:
-    image: minio/minio:${MINIO_VERSION}
-    volumes:
-      - ./data/minio_root:/minio_root:z
-      - ./data/certs:/root/.minio/certs:z
-    command: "minio server /minio_root"
-    env_file:
-      - ./env.minio
-    restart: always
-    networks:
-      - ${NETWORKS}
-  wk-createbuckets:
-    image: minio/mc:${MINIO_MC_VERSION}
-    depends_on:
-      - wk-minio
-    env_file:
-      - ./env.minio
-    entrypoint: >
-      /bin/sh -c "
-      until (/usr/bin/mc config host add minio http://wk-minio:9000 ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY}) do echo '...waiting...' && sleep 1; done;
-      /usr/bin/mc mb minio/outline-bucket;
-      /usr/bin/mc anonymous set download minio/outline-bucket;
-      exit 0;
-      "
-    networks:
-      - ${NETWORKS}
   wk-outline:
     image: outlinewiki/outline:${OUTLINE_VERSION}
     command: sh -c "yarn db:migrate --env production-ssl-disabled && yarn start"
@@ -50,6 +24,8 @@ services:
       - DATABASE_URL_TEST=postgres://user:pass@wk-postgres:5432/outline-test
       - REDIS_URL=redis://wk-redis:6379
       - AWS_S3_UPLOAD_BUCKET_NAME=outline-bucket
+      - FILE_STORAGE=local
+      - FILE_STORAGE_UPLOAD_MAX_SIZE=${FILE_STORAGE_UPLOAD_MAX_SIZE}
     env_file:
       - ./env.outline
       - ./env.oidc
@@ -57,9 +33,10 @@ services:
     depends_on:
       - wk-postgres
       - wk-redis
-      - wk-minio
     networks:
       - ${NETWORKS}
+    volumes:
+      - ./data/outline:/var/lib/outline/data
   wk-oidc-server:
     image: vicalloy/oidc-server
     volumes:
@@ -80,7 +57,6 @@ services:
       - ./data/uc/static_root:/uc/static_root:ro
     restart: always
     depends_on:
-      - wk-minio
       - wk-outline
       - wk-oidc-server
     networks:

@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # Generate config and secrets required to host your own outline server
 . ./config.sh
 . ./utils.sh

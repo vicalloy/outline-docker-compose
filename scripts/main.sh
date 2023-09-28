@@ -6,6 +6,8 @@
 # update config file
 MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-`openssl rand -hex 8`}
 MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-`openssl rand -hex 32`}
+# Should be: OIDC_CLIENT_SECRET=${OIDC_CLIENT_SECRET:-`openssl rand -hex 28`}
+# To maintain compatibility with old version, do not fix this bug.
 OIDC_CLIENT_SECRET=${MINIO_SECRET_KEY:-`openssl rand -hex 28`}
 OUTLINE_SECRET_KEY=${OUTLINE_SECRET_KEY:-`openssl rand -hex 32`}
 OUTLINE_UTILS_SECRET=${OUTLINE_UTILS_SECRET:-`openssl rand -hex 32`}
@@ -54,6 +56,7 @@ function create_outline_env_file {
     env_replace UTILS_SECRET $OUTLINE_UTILS_SECRET $env_file
     env_replace DEFAULT_LANGUAGE $DEFAULT_LANGUAGE $env_file
     env_replace FORCE_HTTPS $FORCE_HTTPS $env_file
+    env_replace FILE_STORAGE $FILE_STORAGE $env_file
 
     env_delete DATABASE_URL $env_file
     env_delete DATABASE_URL_TEST $env_file
@@ -70,7 +73,6 @@ function create_outline_env_file {
     env_replace AWS_SECRET_ACCESS_KEY $MINIO_SECRET_KEY $env_file
     env_replace AWS_S3_UPLOAD_BUCKET_URL $URL $env_file
 
-    env_add PGSSLMODE disable $env_file
     env_add ALLOWED_DOMAINS "$ALLOWED_DOMAINS" $env_file
 }
 
@@ -104,11 +106,21 @@ function create_uc_db_init_file {
 
 function create_env_files {
     create_global_env_file
-    create_minio_env_file
+    # DISABLE_MINIO
+    if [ $FILE_STORAGE == "s3" ]; then
+      create_minio_env_file
+    fi
     create_outline_env_file
     create_oidc_env_file
     create_uc_env_file
     create_uc_db_init_file
+}
+
+function create_apps_config {
+    cp -r ./templates/config/* ../config/
+    if [ $FILE_STORAGE != "s3" ]; then
+      rm_block "MINIO" "../config/nginx/default.conf"
+    fi
 }
 
 function create_docker_compose_file {
@@ -119,12 +131,16 @@ function create_docker_compose_file {
     env_tmpl_replace NETWORKS "$NETWORKS" $file
     env_tmpl_replace MINIO_ACCESS_KEY "$MINIO_ACCESS_KEY" $file
     env_tmpl_replace MINIO_SECRET_KEY "$MINIO_SECRET_KEY" $file
+    if [ "$FILE_STORAGE" != "s3" ]; then
+      rm_block "MINIO" $file
+    fi
 }
 
 function init_cfg {
     update_config_file
     create_docker_compose_file
     create_env_files
+    create_apps_config
 }
 
 function reload_nginx {

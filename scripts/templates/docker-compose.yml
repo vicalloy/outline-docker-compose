@@ -16,6 +16,7 @@ services:
     restart: always
     networks:
       - ${NETWORKS}
+##BEGIN MINIO 
   wk-minio:
     image: minio/minio:${MINIO_VERSION}
     volumes:
@@ -42,6 +43,7 @@ services:
       "
     networks:
       - ${NETWORKS}
+##END
   wk-outline:
     image: outlinewiki/outline:${OUTLINE_VERSION}
     command: sh -c "yarn db:migrate --env production-ssl-disabled && yarn start"
@@ -53,11 +55,15 @@ services:
     env_file:
       - ./env.outline
       - ./env.oidc
+    volumes:
+      - ./data/outline:/var/lib/outline/data
     restart: always
     depends_on:
       - wk-postgres
       - wk-redis
+##BEGIN MINIO 
       - wk-minio
+##END
     networks:
       - ${NETWORKS}
   wk-oidc-server:
@@ -80,7 +86,9 @@ services:
       - ./data/uc/static_root:/uc/static_root:ro
     restart: always
     depends_on:
+##BEGIN MINIO 
       - wk-minio
+##END
       - wk-outline
       - wk-oidc-server
     networks:

@@ -45,3 +45,9 @@ function env_delete {
     filename=$2
     sed "/${key}/d" -i $filename
 }
+
+function rm_block {
+    block=$1
+    filename=$2
+    sed "/##BEGIN ${block}/,/##END/d" -i $filename
+}

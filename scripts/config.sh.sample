@@ -1,3 +1,7 @@
+# Outline Wiki 0.72.0-1 supports local file storage.
+# Specify what storage system to use. Possible value is one of "s3" or "local".
+# For "local", the avatar images and document attachments will be saved on local disk. 
+FILE_STORAGE=s3
 # The url used to vist this web site.
 URL=http://127.0.0.1:8888
 # The default interface language. See translate.getoutline.com for a list of
@@ -14,7 +18,7 @@ FORCE_HTTPS=false
 ALLOWED_DOMAINS=
 
 # Docker image version
-OUTLINE_VERSION=0.67.2
+OUTLINE_VERSION=0.72.0-3
 POSTGRES_VERSION=15.2-alpine3.17
 MINIO_VERSION=RELEASE.2022-11-17T23-20-09Z
 MINIO_MC_VERSION=RELEASE.2022-11-17T21-20-39Z

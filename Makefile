@@ -30,9 +30,11 @@ clean-docker: stop
 	${docker-compose} rm -fsv || true
 
 clean-conf:
-	rm -rfv env.* .env docker-compose.yml config/uc/fixtures/*.json
+	rm -rfv env.* .env docker-compose.yml config/uc/fixtures/*.json \
+		config/nginx
 
 clean-data: clean-docker
-	rm -rfv ./data/certs ./data/minio_root ./data/pgdata ./data/uc
+	rm -rfv ./data/certs ./data/minio_root \
+		./data/pgdata ./data/uc ./data/outline
 
 clean: clean-docker clean-conf

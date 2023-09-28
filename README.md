@@ -6,7 +6,6 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
 
 1. A simple make and bash script to help you generate all the conf required.
 1. A docker-compose to run your service.
-1. Use [MinIO](https://github.com/minio/minio) instead of AWS S3, so that everything is really self-hosted.
 1. A [OIDC server](https://github.com/vicalloy/oidc-server) to manage users, no need to login via Slack or Google.
 
 ## How to use
@@ -19,8 +18,9 @@ Install a self-hosted [Outline](https://github.com/outline/outline) wiki instanc
     # update config file: vim scripts/config.sh
     make install  # Create a docker-compose config file and start it. Initializing the oidc-server(add oidc client for outline and create a superuser).
     ```
-1. Open `http://127.0.0.1:8888` and login to outline.
-1. Open `http://127.0.0.1:8888/uc/admin/auth/user/` to add new users.
+   - NOTE: Outline Wiki 0.72.0-1 supports local file storage. You can set `FILE_STORAGE=local` to use local file storage(MINIO is no longer required).
+2. Open `http://127.0.0.1:8888` and login to outline.
+3. Open `http://127.0.0.1:8888/uc/admin/auth/user/` to add new users.
 
 ## scripts/config.sh
 

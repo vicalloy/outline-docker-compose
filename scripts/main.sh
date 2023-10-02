@@ -3,6 +3,7 @@
 . ./config.sh
 . ./utils.sh
 
+FILE_STORAGE=${FILE_STORAGE:-s3}
 # update config file
 MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY:-`openssl rand -hex 8`}
 MINIO_SECRET_KEY=${MINIO_SECRET_KEY:-`openssl rand -hex 32`}

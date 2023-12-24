@@ -57,6 +57,7 @@ services:
       - ./env.oidc
     volumes:
       - ./data/outline:/var/lib/outline/data
+    user: 0:0
     restart: always
     depends_on:
       - wk-postgres
@@ -93,6 +94,16 @@ services:
       - wk-oidc-server
     networks:
       - ${NETWORKS}
+##BEGIN drawio
+  wk-drawio:
+    image: jgraph/drawio
+    restart: always
+    networks:
+      - ${NETWORKS}
+    ports:
+      - 8081:8080
+      - 8443:8443
+##END
 networks:
   ${NETWORKS}:
     external: ${NETWORKS_EXTERNAL}

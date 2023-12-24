@@ -40,3 +40,6 @@ The config file [scripts/config.sh.sample](scripts/config.sh.sample)
 1. Q: Added a new user, but can't login the outline
     - You should add an email for the new user
     - If the domain in the email is not the same as the admin user's domain, you should add the domain to the settings `ALLOWED_DOMAINS`
+
+2. Q: How to expose outline site to public
+    - In `scripts/config.sh` file, change the line `URL=http://127.0.0.1:8888` to `URL=<my_url>:8888`

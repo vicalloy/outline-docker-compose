@@ -27,7 +27,7 @@ MINIO_MC_VERSION=RELEASE.2022-11-17T21-20-39Z
 # The nginx bind ip and port.
 # If you use ip address to access outline, this ip and port should be same as the URL.
 # If this server behind a proxy(nginx), you can bind to `127.0.0.1`.
-HTTP_IP=127.0.0.1
+HTTP_IP=0.0.0.0
 HTTP_PORT_IP=8888
 
 # Docker

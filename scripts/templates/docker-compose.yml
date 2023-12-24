@@ -57,6 +57,7 @@ services:
       - ./env.oidc
     volumes:
       - ./data/outline:/var/lib/outline/data
+    user: 0:0
     restart: always
     depends_on:
       - wk-postgres
